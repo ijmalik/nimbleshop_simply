@@ -2,12 +2,14 @@ Here is receipt for your purchase at <%= @shop.name %> . When items are shipped 
 
 Payment date: <%= @payment_date %>
 
+<% if @order.shipping_address %>
 Shipping address:
 <% @order.shipping_address.full_address_array.each do |line| %>
-<%= line %>
+  <%= line %>
+<% end %>
 <% end %>
 
-<% unless @order.shipping_address.use_for_billing %>
+<% if @order.shipping_address && !@order.shipping_address.use_for_billing %>
 Billing address :
 <% @order.billing_address.full_address_array.each do |line| %>
 <%= line %>
@@ -25,7 +27,10 @@ Item total price: <%= number_to_currency(line_item.price) %>
 
 <% end %>
 
-Shipping method: <%= @order.shipping_method.name %>
-Shipping cost: <%= number_to_currency(@order.shipping_method.shipping_cost) %>
+<% if @order.shipping_method %>
+  Shipping method: <%= @order.shipping_method.name %>
+  Shipping cost: <%= number_to_currency(@order.shipping_method.shipping_cost) %>
+<% end %>
+
 
 Total amount: <%= number_to_currency(@order.total_amount) %>

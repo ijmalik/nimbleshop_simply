@@ -12,14 +12,20 @@ module NimbleshopSimply
     end
 
     def update
-      if params[:order][:shipping_address_attributes][:use_for_billing] == '1'
-        current_order.billing_address_same_as_shipping = true
-      else
-        current_order.billing_address_same_as_shipping = false
+      unless current_order.has_digital_goods?
+        if params[:order][:shipping_address_attributes][:use_for_billing] == '1'
+          current_order.billing_address_same_as_shipping = true
+        else
+          current_order.billing_address_same_as_shipping = false
+        end
       end
 
       if current_order.update_attributes(params[:order].merge(validate_email: true))
-        redirect_to new_checkout_shipping_method_path
+        if current_order.has_digital_goods?
+          redirect_to  new_checkout_payment_path
+        else
+          redirect_to new_checkout_shipping_method_path
+        end
       else
         @countries = ShippingMethod.available_for_countries(current_order.line_items_total)
         current_order.initialize_addresses
