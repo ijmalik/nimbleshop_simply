@@ -136,6 +136,8 @@ module NimbleshopSimply
         100 M/330 FT Water resistant
       }
       product = Product.create!( title: "chronograph sport watch from Guess", price: 219, description: desc)
+      product.digital = true
+      product.save!
       handle_pictures_for_product(product, "product2")
       product.custom_field_answers.create(custom_field: CustomField.first, value: 'fashion')
     end
