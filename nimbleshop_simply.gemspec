@@ -1,6 +1,11 @@
 # Encoding: UTF-8
 
-version = '0.0.17.beta'
+f = File.join( File.dirname(__FILE__), '..', '..', 'nimbleshop', 'NIMBLESHOP_VERSION')
+if File.exist? f
+  version = File.read(f).strip
+else
+  version = '0.0.18.beta'
+end
 
 Gem::Specification.new do |gem|
 
