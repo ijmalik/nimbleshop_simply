@@ -4,7 +4,7 @@ f = File.join( File.dirname(__FILE__), '..', '..', 'nimbleshop', 'NIMBLESHOP_VER
 if File.exist? f
   version = File.read(f).strip
 else
-  version = '0.0.19'
+  version = '0.0.20'
 end
 
 Gem::Specification.new do |gem|
