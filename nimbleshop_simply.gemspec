@@ -1,10 +1,10 @@
 # Encoding: UTF-8
 
-f = File.join( File.dirname(__FILE__), '..', '..', 'nimbleshop', 'NIMBLESHOP_VERSION')
+f = File.join( File.dirname(__FILE__), '..', 'nimbleshop', 'NIMBLESHOP_VERSION')
 if File.exist? f
   version = File.read(f).strip
 else
-  version = '0.0.20'
+  version = '0.0.21'
 end
 
 Gem::Specification.new do |gem|
